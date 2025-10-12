@@ -1,0 +1,94 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #0f0f0f, #202020);
+    color: white;
+    text-align: center;
+    margin: 0;
+    padding-bottom: 80px;
+}
+
+header {
+    background: rgba(0, 0, 0, 0.7);
+    padding: 20px;
+    font-size: 1.8rem;
+    font-weight: bold;
+}
+
+main {
+    margin-top: 40px;
+}
+
+.content {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 30px;
+    display: inline-block;
+    border-radius: 12px;
+    text-align: center;
+    width: 60%;
+    max-width: 600px;
+}
+
+form {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 30px;
+    display: inline-block;
+    border-radius: 10px;
+    text-align: left;
+}
+
+input, select, button {
+    display: block;
+    width: 100%;
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 6px;
+    border: none;
+    box-sizing: border-box;
+}
+
+button, .btn {
+    background: #ffb400;
+    color: black;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    transition: 0.2s ease-in-out;
+}
+
+button:hover, .btn:hover {
+    background: #ffd166;
+}
+
+.table-container {
+    width: 80%;
+    margin: 0 auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 30px;
+}
+
+table, th, td {
+    border: 1px solid #444;
+}
+
+th, td {
+    padding: 10px;
+}
+
+th {
+    background-color: #ffb400;
+    color: black;
+}
+
+footer {
+    background: rgba(0, 0, 0, 0.8);
+    padding: 20px;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+}

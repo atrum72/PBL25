@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Student Dashboard</h1>
+        <a href="/" class="btn small">Logout</a>
+    </header>
+
+    <main>
+        <div class="content">
+            <h2>Welcome, {{ student_name or 'Student' }}!</h2>
+            <p>Check your attendance status and profile information below.</p>
+
+            <div class="info-box">
+                <p><b>Total Lectures:</b> 10</p>
+                <p><b>Lectures Attended:</b> 8</p>
+                <p><b>Attendance %:</b> 80%</p>
+            </div>
+
+            <a href="attendance_report.html" class="btn">View Detailed Report</a>
+        </div>
+    </main>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Teacher Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Teacher Dashboard</h1>
+        <a href="/" class="btn small">Logout</a>
+    </header>
+
+    <main>
+        <div class="content">
+            <h2>Welcome, {{ teacher_name or 'Teacher' }}!</h2>
+            <p>Manage attendance, view reports, and control your class sessions.</p>
+
+            <div class="buttons">
+                <a href="/start_lecture" class="btn">Start New Lecture</a>
+                <a href="/attendance_report" class="btn">View Attendance Report</a>
+                <a href="/add_student" class="btn">Add Student</a>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
