@@ -10,4 +10,5 @@
 2. Numpy\
 3. Open-csv\
 4.Face_recognition\
-5. Mysql-connector-python}
+5. Mysql-connector-python/
+6.scapy}
