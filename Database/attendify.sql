@@ -1,3 +1,4 @@
+CREATE DATABASE attendify;
 USE attendify;
 CREATE TABLE students (student_id INT AUTO_INCREMENT PRIMARY KEY,roll_no VARCHAR(20) UNIQUE NOT NULL,name VARCHAR(100) NOT NULL,
     email VARCHAR(100) UNIQUE NOT NULL,password VARCHAR(100) NOT NULL,mac_address VARCHAR(50) UNIQUE,face_image_path VARCHAR(255));
@@ -16,11 +17,11 @@ CREATE TABLE attendance (attendance_id INT AUTO_INCREMENT PRIMARY KEY,student_id
     FOREIGN KEY (timetable_id) REFERENCES timetable(timetable_id),UNIQUE(student_id, timetable_id, date));
 
 INSERT INTO students (roll_no, name, email, password, mac_address, face_image_path) VALUES
-('10', 'Sanjivani Chewale', 'spchewale371123@kkwagh.edu.in','pass@123','b8:94:e7:24:cd:8d','C:\Users\hp\Desktop\PBL25\sanjivni'),
-('14', 'Atharva Deshmukh','asdeshmukh371123@kkwagh.edu.in', 'pass@123','78:5E:CC:35:AA:09','C:\Users\hp\Desktop\PBL25\atharva'),
-('15', 'Dhawal Deshmukh','dndeshmukh371123@kkwagh.edu.in', 'pass@123', 'e4:8c:73:b2:c1:a7','C:\Users\hp\Desktop\PBL25\dhawal'),
-('18', 'Manasi Jadhav','mujadhav371123@kkwagh.edu.in', 'pass@123','44:16:FA:56:B9:34','C:\Users\hp\Desktop\PBL25\manasi'),
-('22', 'Bhumi Kalantri','bkkalantri371123@kkwagh.edu.in', 'pass@123','14:9b:f3:2f:28:e9','C:\Users\hp\Desktop\PBL25\bhumi');
+('10', 'Sanjivani Chewale', 'spchewale371123@kkwagh.edu.in','pass@123','b8:94:e7:24:cd:8d','/images/students/sanjivani.jpg'),
+('14', 'Atharva Deshmukh','asdeshmukh371123@kkwagh.edu.in', 'pass@123','78:5E:CC:35:AA:09','/images/students/atharva.jpg'),
+('15', 'Dhawal Deshmukh','dndeshmukh371123@kkwagh.edu.in', 'pass@123', 'e4:8c:73:b2:c1:a7','/images/students/dhawal.jpg'),
+('18', 'Manasi Jadhav','mujadhav371123@kkwagh.edu.in', 'pass@123','44:16:FA:56:B9:34','/images/students/manasi.jpg'),
+('22', 'Bhumi Kalantri','bkkalantri371123@kkwagh.edu.in', 'pass@123','14:9b:f3:2f:28:e9','/images/students/bhumi.jpg');
 
 INSERT INTO teachers (name, subject_name, email, password) VALUES
 ('Prof. Pranali Shinde', 'DSA', 'pkshinde@kkwagh.edu.in', 'pass@123'),
@@ -124,7 +125,7 @@ VALUES
 (2, 6, CURDATE()),
 (3, 6, CURDATE()),
 (4, 6, CURDATE()),
-(5, 6, CURDATE());
+(5, 6, CURDATE());
 
 
 
@@ -193,3 +194,42 @@ JOIN
     timetable t ON a.timetable_id = t.timetable_id
 ORDER BY 
     a.date, s.name, t.subject_name;
+    
+USE attendify; -- Select your database
+
+-- Paste the command here to update the passwords
+UPDATE students SET password = SHA2('pass@123', 256) WHERE student_id > 0;
+UPDATE teachers SET password = SHA2('pass@123', 256) WHERE teacher_id > 0;
+
+SET SQL_SAFE_UPDATES = 0;
+ALTER TABLE timetable ADD COLUMN class_year VARCHAR(10) NOT NULL;
+-- Assigning subjects to S.Y. (Second Year)
+UPDATE timetable SET class_year = 'S.Y.' WHERE subject_name = 'DSA';
+UPDATE timetable SET class_year = 'S.Y.' WHERE subject_name = 'DSAL';
+UPDATE timetable SET class_year = 'S.Y.' WHERE subject_name = 'COA';
+UPDATE timetable SET class_year = 'S.Y.' WHERE subject_name = 'MIS';
+
+-- Assigning subjects to T.Y. (Third Year)
+UPDATE timetable SET class_year = 'T.Y.' WHERE subject_name = 'DSBD';
+UPDATE timetable SET class_year = 'T.Y.' WHERE subject_name = 'DSBDL';
+UPDATE timetable SET class_year = 'T.Y.' WHERE subject_name = 'IOT';
+UPDATE timetable SET class_year = 'T.Y.' WHERE subject_name = 'IOTL';
+UPDATE timetable SET class_year = 'T.Y.' WHERE subject_name = 'PBL';
+UPDATE timetable SET class_year = 'T.Y.' WHERE subject_name = 'PBLT';
+
+-- Assigning subjects to S.Y. (Second Year)
+UPDATE timetable SET class_year = 'S.Y.' WHERE subject_name = 'DSA';
+UPDATE timetable SET class_year = 'S.Y.' WHERE subject_name = 'DSAL';
+UPDATE timetable SET class_year = 'S.Y.' WHERE subject_name = 'COA';
+UPDATE timetable SET class_year = 'S.Y.' WHERE subject_name = 'MIS';
+
+-- Assigning subjects to T.Y. (Third Year)
+UPDATE timetable SET class_year = 'T.Y.' WHERE subject_name = 'DSBD';
+UPDATE timetable SET class_year = 'T.Y.' WHERE subject_name = 'DSBDL';
+UPDATE timetable SET class_year = 'T.Y.' WHERE subject_name = 'IOT';
+UPDATE timetable SET class_year = 'T.Y.' WHERE subject_name = 'IOTL';
+UPDATE timetable SET class_year = 'T.Y.' WHERE subject_name = 'PBL';
+UPDATE timetable SET class_year = 'T.Y.' WHERE subject_name = 'PBLT';
+
+-- Assigning subjects to B.TECH (Final Year)
+UPDATE timetable SET class_year = 'B.TECH' WHERE subject_name = 'AI';
