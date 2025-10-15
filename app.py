@@ -62,6 +62,47 @@ def logout():
     session.clear()
     return redirect(url_for('home'))
 
+# -------------------- REGISTRATION --------------------
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    if request.method == 'POST':
+        name = request.form['name']
+        college_id = request.form['college_id']
+        department = request.form['department']
+        email = request.form['email']
+        profile_pic = request.files['profile_pic']
+        face_photos = request.files.getlist('face_photos')
+
+        # Hash a default password
+        default_password = "pass@123"
+        hashed_password = hashlib.sha256(default_password.encode()).hexdigest()
+
+        # Save profile picture
+        profile_folder = os.path.join(app.static_folder, 'uploads')
+        os.makedirs(profile_folder, exist_ok=True)
+        profile_path = os.path.join(profile_folder, profile_pic.filename)
+        profile_pic.save(profile_path)
+
+        # Save face recognition photos
+        face_folder = os.path.join(app.static_folder, 'face_data', college_id)
+        os.makedirs(face_folder, exist_ok=True)
+        for photo in face_photos:
+            photo.save(os.path.join(face_folder, photo.filename))
+
+        # Insert student into database
+        cursor = mysql.connection.cursor()
+        cursor.execute("""
+            INSERT INTO students (roll_no, name, department, email, password, face_image_path)
+            VALUES (%s, %s, %s, %s, %s, %s)
+        """, (college_id, name, department, email, hashed_password, profile_path))
+        mysql.connection.commit()
+        cursor.close()
+
+        flash("Registration successful! You can now login.", "success")
+        return redirect(url_for('home'))
+
+    return render_template('register.html')
+
 # -------------------- DASHBOARDS --------------------
 @app.route('/student_dashboard')
 def student_dashboard():
