@@ -6,7 +6,7 @@ import hashlib
 import os
 
 # -------------------- APP SETUP --------------------
-app = Flask(__name__, template_folder='FrontendPBL/templates', static_folder='FrontendPBL/static')
+app = Flask(__name__, template_folder='templates', static_folder='static')
 app.secret_key = 'supersecretkey'
 
 # -------------------- DATABASE CONFIG --------------------
