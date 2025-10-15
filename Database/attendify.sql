@@ -1,4 +1,3 @@
-CREATE DATABASE attendify;
 USE attendify;
 CREATE TABLE students (student_id INT AUTO_INCREMENT PRIMARY KEY,roll_no VARCHAR(20) UNIQUE NOT NULL,name VARCHAR(100) NOT NULL,
     email VARCHAR(100) UNIQUE NOT NULL,password VARCHAR(100) NOT NULL,mac_address VARCHAR(50) UNIQUE,face_image_path VARCHAR(255));
@@ -125,7 +124,7 @@ VALUES
 (2, 6, CURDATE()),
 (3, 6, CURDATE()),
 (4, 6, CURDATE()),
-(5, 6, CURDATE());
+(5, 6, CURDATE());
 
 
 
