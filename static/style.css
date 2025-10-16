@@ -1,4 +1,4 @@
-/* signup.css */
+/* pbl1.css - Login Page styles */
 
 /* 1. VARIABLES & BASE STYLES */
 :root {
@@ -10,7 +10,7 @@
     --border: hsl(210, 30%, 90%);
 }
 
-•⁠  ⁠{
+* {
     box-sizing: border-box;
     font-family: system-ui, sans-serif;
     margin: 0;
@@ -27,28 +27,50 @@ body {
     padding: 20px;
 }
 
-/* 2. SIGN-UP CONTAINER CARD */
-.login-container {
+/* 2. MAIN LAYOUT CONTAINER */
+.main-container {
+    display: flex;
+    width: 100%;
+    max-width: 900px;
     background-color: white;
-    padding: 40px;
     border-radius: 1rem;
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
     border: 1px solid var(--border);
-    width: 100%;
-    max-width: 400px;
+    overflow: hidden;
 }
 
-/* 3. FORM ELEMENTS */
-h2 {
-    text-align: center;
-    margin-bottom: 30px;
+/* 3. BRANDING & LOGIN SECTIONS */
+.attendify-name {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    font-size: 5rem; /* Adjusted for better fit */
     font-weight: 700;
-    font-size: 2rem;
-    /* Applying the signature gradient text effect */
+    line-height: 1.1;
+    text-align: center;
+    /* The signature gradient text effect */
     background: linear-gradient(135deg, var(--primary), var(--secondary));
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
+}
+
+.login-container {
+    flex: 1;
+    padding: 50px 40px;
+    background-color: hsl(0, 0%, 100%); /* Slightly different white for depth */
+    border-left: 1px solid var(--border);
+}
+
+/* 4. FORM ELEMENTS */
+.login-container h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-weight: 600;
+    font-size: 1.8rem;
+    color: var(--foreground);
 }
 
 .input-group {
@@ -88,7 +110,6 @@ button[type="submit"] {
     cursor: pointer;
     font-size: 1.1rem;
     font-weight: 600;
-    margin-top: 10px;
     transition: all 0.2s ease;
 }
 
@@ -97,13 +118,38 @@ button[type="submit"]:hover {
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
 }
 
-/* 4. LOGIN LINK */
-p a {
+/* 5. SIGN-UP LINK */
+.signup-prompt {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 0.9rem;
+    color: hsl(220, 10%, 45%);
+}
+
+.signup-prompt a {
     color: var(--primary);
     text-decoration: none;
     font-weight: 600;
 }
 
-p a:hover {
+.signup-prompt a:hover {
     text-decoration: underline;
+}
+
+/* 6. RESPONSIVE DESIGN */
+@media (max-width: 768px) {
+    .main-container {
+        flex-direction: column;
+    }
+
+    .attendify-name {
+        font-size: 4rem;
+        padding: 40px 20px;
+    }
+
+    .login-container {
+        border-left: none;
+        border-top: 1px solid var(--border);
+        width: 100%;
+    }
 }
