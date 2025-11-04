@@ -1,0 +1,281 @@
+:root {
+  --background: hsl(210, 40%, 98%);
+  --foreground: hsl(220, 15%, 20%);
+  --primary: hsl(210, 100%, 50%);
+  --secondary: hsl(180, 80%, 45%);
+  --accent: hsl(25, 95%, 55%);
+  --muted: hsl(210, 30%, 94%);
+  --border: hsl(210, 30%, 90%);
+}
+
+•⁠  ⁠{
+  box-sizing: border-box;
+  font-family: system-ui, sans-serif;
+}
+
+body {
+  margin: 0;
+  background: var(--background);
+  color: var(--foreground);
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.dashboard {
+  max-width: 900px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* STUDENT INFO */
+.student-info {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  padding: 20px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+.student-info img {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--primary);
+}
+
+.student-details {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.student-details h2 {
+  font-size: 1.3rem;
+  margin: 0;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.student-details p {
+  margin: 0;
+  font-size: 0.95rem;
+  color: hsl(220, 10%, 45%);
+}
+
+/* LOGOUT BUTTON */
+.logout-section {
+  text-align: right;
+  margin: 0 0 1rem 0;
+}
+
+#logoutBtn {
+  background-color: hsl(0, 70%, 50%);
+  color: white;
+  border: none;
+  padding: 0.5rem 1.2rem;
+  font-size: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 2px 8px hsla(0, 70%, 50%, 0.6);
+}
+
+#logoutBtn:hover {
+  background-color: hsl(0, 70%, 40%);
+}
+
+/* ATTENDANCE */
+.attendance {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.circle-container {
+  position: relative;
+  width: 150px;
+  height: 150px;
+}
+
+.progress-ring {
+  transform: rotate(-90deg);
+  width: 150px;
+  height: 150px;
+}
+
+#progress {
+  transition: stroke-dashoffset 1s ease-out;
+  filter: drop-shadow(0 0 10px hsla(210, 100%, 50%, 0.3));
+}
+
+.circle-label {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.circle-label span {
+  font-size: 2rem;
+  font-weight: bold;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.attendance-text {
+  margin-top: 1rem;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: hsl(220, 10%, 45%);
+}
+
+/* STAT CARDS */
+.stats {
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.stat-card {
+  flex: 1;
+  min-width: 150px;
+  padding: 20px;
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(6px);
+  border: 1px solid var(--border);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.stat-card:hover {
+  transform: translateY(-5px) scale(1.05);
+  box-shadow: 0 0 30px hsla(210, 100%, 50%, 0.2);
+}
+
+.icon {
+  font-size: 1.8rem;
+  margin-bottom: 10px;
+}
+
+.stat-card h3 {
+  font-size: 0.9rem;
+  color: hsl(220, 10%, 45%);
+  margin: 0 0 0.3rem;
+}
+
+.value {
+  font-size: 2rem;
+  font-weight: bold;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+/* SUBJECTS */
+.subjects {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.subject-card {
+  padding: 20px;
+  background: linear-gradient(145deg, white 0%, hsl(280 100% 99%) 100%);
+  border-radius: 1rem;
+  border: 1px solid var(--border);
+  transition: transform 0.3s;
+}
+
+.subject-card:hover {
+  transform: translateY(-3px) scale(1.02);
+}
+
+.subject-card h4 {
+  font-size: 1.1rem;
+  margin-bottom: 0.3rem;
+}
+
+.subject-info {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9rem;
+  color: hsl(220, 10%, 45%);
+  margin-bottom: 8px;
+}
+
+.subject-info .percent {
+  font-weight: bold;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.progress-bar {
+  height: 10px;
+  background: var(--muted);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  transition: width 1s ease-out;
+}
+
+/* READ MORE */
+.extra-subject {
+  display: none;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.extra-subject.show {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.read-more-btn {
+  padding: 10px 16px;
+  border: none;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: white;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: transform 0.2s;
+}
+
+.read-more-btn:hover {
+  transform: scale(1.05);
+}
+
+/* RESPONSIVE */
+@media (max-width: 600px) {
+  .stats {
+    flex-direction: column;
+  }
+  .student-info {
+    flex-direction: column;
+    text-align: center;
+  }
+}

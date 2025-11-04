@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Teacher Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='teacher.css') }}">
+</head>
+<body>
+    <div class="dashboard-wrapper">
+        <header class="top-header">
+            <h1>ATTENDIFY: Teacher Dashboard</h1>
+            <nav class="user-nav">
+                <a href="#">Welcome, {{ user_name }}</a>
+                <a href="{{ url_for('logout') }}">Logout</a>
+            </nav>
+        </header>
+        <main class="main-layout">
+            <aside class="sidebar">
+                <div class="teacher-info-simple">
+                    <p class="teacher-name">{{ user_name }}</p>
+                </div>
+            </aside>
+            <section class="content-area">
+                <h2>Select Class</h2>
+                <div class="class-grid">
+                    <a href="#" class="class-card" data-year="F.Y."><h3>F.Y.</h3><p>First Year</p></a>
+                    <a href="#" class="class-card" data-year="S.Y."><h3>S.Y.</h3><p>Second Year</p></a>
+                    <a href="#" class="class-card" data-year="T.Y."><h3>T.Y.</h3><p>Third Year</p></a>
+                    <a href="#" class="class-card" data-year="B.TECH"><h3>B.TECH</h3><p>Final Year</p></a>
+                </div>
+
+                <div id="subjects-container" class="hidden"></div>
+
+    <!-- Attendance options -->
+    <div id="attendance-marker-container" class="hidden">
+        <!-- Wi-Fi Scan button -->
+        <button id="wifi-scan-btn" style="display:none;">Start Lecture (Wi-Fi Scan)</button>
+        <div id="wifi-scan-results"></div>
+    </div>
+
+            </section>
+        </main>
+    </div>
+    <script src="{{ url_for('static', filename='dashboard_logic.js') }}"></script> 
+</body>
+</html>

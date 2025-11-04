@@ -1,0 +1,307 @@
+/* teacher_dashboard.css */
+
+/* 1. VARIABLES & BASE STYLES */
+:root {
+    --background: hsl(210, 40%, 98%);
+    --foreground: hsl(220, 15%, 20%);
+    --primary: hsl(210, 100%, 50%);
+    --secondary: hsl(180, 80%, 45%);
+    --accent: hsl(25, 95%, 55%);
+    --muted: hsl(210, 30%, 94%);
+    --border: hsl(210, 30%, 90%);
+}
+
+•⁠  ⁠{
+    box-sizing: border-box;
+    font-family: system-ui, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: var(--background);
+    color: var(--foreground);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+
+.dashboard-wrapper {
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+/* 2. LAYOUT COMPONENTS */
+.top-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    background: white;
+    border-radius: 1rem;
+    border: 1px solid var(--border);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.top-header h1 {
+    font-size: 1.8rem;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.user-nav a {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 600;
+    margin-left: 20px;
+}
+
+.main-layout {
+    display: flex;
+    gap: 30px;
+    flex: 1;
+}
+
+.sidebar {
+    width: 250px;
+    flex-shrink: 0;
+    background: white;
+    border-radius: 1rem;
+    border: 1px solid var(--border);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.teacher-info-simple {
+    text-align: center;
+    width: 100%;
+}
+
+.teacher-info-simple .teacher-name {
+    font-size: 1.4rem;
+    font-weight: bold;
+    margin-bottom: 5px;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.teacher-info-simple .teacher-email {
+    font-size: 0.9rem;
+    color: hsl(220, 10%, 45%);
+}
+
+.content-area {
+    flex-grow: 1;
+    background: white;
+    border-radius: 1rem;
+    border: 1px solid var(--border);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    padding: 30px;
+}
+
+.content-area h2 {
+    font-size: 1.6rem;
+    margin-bottom: 25px;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* 3. INTERACTIVE CARDS */
+.class-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 20px;
+}
+
+.class-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 25px;
+    background: var(--muted);
+    border-radius: 1rem;
+    text-decoration: none;
+    color: var(--foreground);
+    border: 1px solid var(--border);
+    transition: all 0.3s;
+    cursor: pointer;
+}
+
+.class-card:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: white;
+}
+
+.class-card h3 {
+    margin: 0 0 5px 0;
+    font-size: 1.5rem;
+    color: var(--primary);
+    transition: color 0.3s;
+}
+
+.class-card:hover h3 {
+    color: white;
+}
+
+.class-card p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: hsl(220, 10%, 45%);
+    transition: color 0.3s;
+}
+
+.class-card:hover p {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.subjects-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.subject-link {
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: var(--muted);
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    transition: all 0.2s;
+}
+
+.subject-link:hover {
+    background: var(--primary);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* 4. DYNAMIC CONTENT */
+.hidden {
+    display: none;
+}
+
+#subjects-container,
+#attendance-marker-container {
+    margin-top: 40px;
+    padding: 30px;
+    background: white;
+    border-radius: 1rem;
+    border: 1px solid var(--border);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+#subjects-container h3,
+#attendance-marker-container h3 {
+    font-size: 1.4rem;
+    margin-bottom: 25px;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.attendance-method-options {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.attendance-card {
+    padding: 25px 20px;
+    border-radius: 1rem;
+    border: 1px solid var(--border);
+    background-color: var(--background);
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.attendance-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+.attendance-card .icon {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+}
+
+.attendance-card h4 {
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+    color: var(--primary);
+}
+
+.attendance-card p {
+    font-size: 0.85rem;
+    color: hsl(220, 10%, 45%);
+    line-height: 1.4;
+}
+
+/* 5. RESPONSIVE */
+@media (max-width: 992px) {
+    .main-layout {
+        flex-direction: column;
+    }
+    .sidebar {
+        width: 100%;
+        order: -1;
+    }
+    .top-header {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+
+@media (max-width: 600px) {
+    .class-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Style for Start Lecture button */
+#wifi-scan-btn {
+    background-color: #03226b; /* Green background */
+    color: white;              /* White text */
+    border: none;              /* Remove default border */
+    padding: 9px 18px;        /* Add some padding */
+    font-size: 13px;           /* Slightly larger text */
+    border-radius: 8px;        /* Rounded corners */
+    cursor: pointer;           /* Pointer on hover */
+    transition: all 0.3s ease; /* Smooth hover effect */
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1); /* Soft shadow */
+}
+
+/* Hover effect */
+#wifi-scan-btn:hover {
+    background-color: #03226b; /* Darker green on hover */
+    transform: translateY(-2px); /* Slight lift */
+    box-shadow: 0 6px 8px rgba(0,0,0,0.15); /* Stronger shadow */
+}
+
+/* Optional: Focus outline for accessibility */
+#wifi-scan-btn:focus {
+    outline: 2px solid #03226b;
+    outline-offset: 2px;
+}

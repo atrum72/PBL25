@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Student Attendance Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="student.css" />
+</head>
+<body>
+  <div class="dashboard">
+
+    <!-- Student Info -->
+    <section class="student-info">
+      <img src="" alt="Student Photo" />
+      <div class="student-details">
+        <h2>Student Name</h2>
+        <p>Email: </p>
+        <p>Roll No: </p>
+      </div>
+    </section>
+
+    <!-- Logout Button -->
+    <section class="logout-section">
+      <button id="logoutBtn">Logout</button>
+    </section>
+
+    <!-- Overall Attendance -->
+    <section class="attendance">
+      <div class="circle-container">
+        <svg viewBox="0 0 120 120" class="progress-ring">
+          <defs>
+            <linearGradient id="progressGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="hsl(210, 100%, 50%)" />
+              <stop offset="50%" stop-color="hsl(180, 80%, 45%)" />
+              <stop offset="100%" stop-color="hsl(25, 95%, 55%)" />
+            </linearGradient>
+          </defs>
+          <circle cx="60" cy="60" r="52" stroke="hsl(210, 30%, 94%)" stroke-width="12" fill="none" />
+          <circle id="progress" cx="60" cy="60" r="52"
+            stroke="url(#progressGradient)" stroke-width="12" stroke-linecap="round"
+            fill="none" stroke-dasharray="326.73" stroke-dashoffset="326.73" />
+        </svg>
+        <div class="circle-label">
+          <span id="percentage">0%</span>
+        </div>
+      </div>
+      <p class="attendance-text">Overall Attendance</p>
+    </section>
+
+    <!-- Stats -->
+    <section class="stats">
+      <div class="stat-card blue">
+        <div class="icon">📚</div>
+        <h3>Total Classes</h3>
+        <div class="value" id="totalClasses">0</div>
+      </div>
+      <div class="stat-card teal">
+        <div class="icon">🧑‍🎓</div>
+        <h3>Present</h3>
+        <div class="value" id="presentClasses">0</div>
+      </div>
+      <div class="stat-card orange">
+        <div class="icon">⏰</div>
+        <h3>Missed</h3>
+        <div class="value" id="missedClasses">0</div>
+      </div>
+    </section>
+
+    <!-- Subject Attendance -->
+    <section class="subjects" id="subjects"></section>
+    <button class="read-more-btn" id="readMoreBtn">Read More</button>
+  </div>
+
+  <script>
+    async function loadStudentData() {
+      const params = new URLSearchParams(window.location.search);
+      const roll_no = params.get('roll_no') || '14'; // Default roll_no if not given
+
+      const res = await fetch(⁠ get_student_data.php?roll_no=${roll_no} ⁠);
+      const student = await res.json();
+
+      if (student.error) {
+        alert(student.error);
+        return;
+      }
+
+      // Student info
+      document.querySelector(".student-info img").src = student.photo;
+      document.querySelector(".student-details h2").textContent = student.name;
+      document.querySelector(".student-details p:nth-of-type(1)").textContent = ⁠ Email: ${student.email} ⁠;
+      document.querySelector(".student-details p:nth-of-type(2)").textContent = ⁠ Roll No: ${student.roll_no} ⁠;
+
+      // Stats
+      document.getElementById("totalClasses").textContent = student.total_classes;
+      document.getElementById("presentClasses").textContent = student.total_present;
+      document.getElementById("missedClasses").textContent = student.total_classes - student.total_present;
+
+      // Subject-wise
+      const container = document.getElementById("subjects");
+      container.innerHTML = "";
+      student.subjects.forEach((sub, i) => {
+        const card = document.createElement("div");
+        card.className = ⁠ subject-card ${i >= 4 ? "extra-subject" : ""} ⁠;
+        card.innerHTML = `
+          <h4>${sub.subject_name}</h4>
+          <div class="subject-info">
+            <span>${sub.classes_present} / ${sub.total_classes}</span>
+            <span class="percent">${sub.attendance_percentage}%</span>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-fill" style="width:${sub.attendance_percentage}%;"></div>
+          </div>`;
+        container.appendChild(card);
+      });
+
+      // Animate circle
+      animateCircle(student.overall);
+    }
+
+    function animateCircle(target) {
+      const progress = document.getElementById("progress");
+      const percentageText = document.getElementById("percentage");
+      const totalLength = 2 * Math.PI * 52;
+      let current = 0;
+      const interval = setInterval(() => {
+        if (current >= target) {
+          clearInterval(interval);
+        } else {
+          current++;
+          const offset = totalLength * (1 - current / 100);
+          progress.style.strokeDashoffset = offset;
+          percentageText.textContent = current + "%";
+        }
+      }, 20);
+    }
+
+    document.getElementById("readMoreBtn").addEventListener("click", () => {
+      const extras = document.querySelectorAll(".extra-subject");
+      const expanded = extras[0]?.classList.contains("show");
+      extras.forEach(e => e.classList.toggle("show", !expanded));
+      document.getElementById("readMoreBtn").textContent = expanded ? "Read More" : "Show Less";
+    });
+
+    // Logout button functionality
+    document.getElementById("logoutBtn").addEventListener("click", () => {
+      // Example: Redirect to login page or clear session here
+      window.location.href = 'login.html'; // Change to your login URL
+    });
+
+    loadStudentData();
+  </script>
+</body>
+</html>
